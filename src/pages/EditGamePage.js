@@ -8,7 +8,7 @@ export default function EditGamePage() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		fetch(`http://localhost:8080/games/${id}`)
+		fetch(`https://gameportal-ebb6841accf5.herokuapp.com/games/${id}`)
 			.then((response) => response.json())
 			.then((data) => {
 				setGame(data);
@@ -26,7 +26,7 @@ export default function EditGamePage() {
 		formData.append('image', file);
 		formData.append('id', id);
 
-		fetch(`http://localhost:8080/games/upload-image`, {
+		fetch(`https://gameportal-ebb6841accf5.herokuapp.com/games/upload-image`, {
 			method: 'POST',
 			body: formData,
 		})
@@ -42,7 +42,7 @@ export default function EditGamePage() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		fetch(`http://localhost:8080/games/update-game/${id}`, {
+		fetch(`https://gameportal-ebb6841accf5.herokuapp.com/games/update-game/${id}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

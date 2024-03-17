@@ -10,11 +10,11 @@ export default function GamePage() {
 
 	useEffect(() => {
 		// Pobierz dane gry na podstawie id
-		fetch(`http://localhost:8080/games/${id}`)
+		fetch(`https://gameportal-ebb6841accf5.herokuapp.com/games/${id}`)
 			.then((response) => response.json())
 			.then((data) => {
 				// Dodaj pełny adres URL do obrazu
-				data.image = `http://localhost:8080/images/${data.title.replace(/ /g, '_')}.jpg`;
+				data.image = `https://gameportal-ebb6841accf5.herokuapp.com/images/${data.title.replace(/ /g, '_')}.jpg`;
 				setGame(data);
 			})
 			.catch((error) => console.error('Error fetching data:', error));
@@ -35,7 +35,7 @@ export default function GamePage() {
 
 	const handleDelete = () => {
 		if (window.confirm('Czy na pewno chcesz usunąć tę grę?')) {
-			fetch(`http://localhost:8080/games/delete-game/${id}`, {
+			fetch(`https://gameportal-ebb6841accf5.herokuapp.com/games/delete-game/${id}`, {
 				method: 'DELETE',
 			})
 				.then((response) => {

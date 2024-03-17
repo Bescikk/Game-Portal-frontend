@@ -12,7 +12,7 @@ export default function AddGamePage() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		fetch(`http://localhost:8080/games/add-game`, {
+		fetch(`https://gameportal-ebb6841accf5.herokuapp.com/games/add-game`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

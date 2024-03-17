@@ -2,6 +2,12 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: sans-serif;
+	list-style: none;
+}
+
+a {
+	color: inherit;
+	text-emphasis: none;
 }
 
 .container {

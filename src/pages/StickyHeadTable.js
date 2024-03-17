@@ -12,6 +12,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Define custom styles for table cells
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -42,7 +43,7 @@ export default function StickyHeadTable() {
 
 	// Fetch data when component mounts
 	useEffect(() => {
-		fetch('http://localhost:8080/games')
+		fetch('https://gameportal-ebb6841accf5.herokuapp.com/games')
 			.then((response) => response.json())
 			.then((data) => {
 				const updatedRows = data.map((row, index) => ({
@@ -126,17 +127,18 @@ export default function StickyHeadTable() {
 						{/* Map through each row in sortedRows (only for the current page) and create a row for it */}
 						{sortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
 							// The row in the table body. When clicked, it navigates to the game details page.
-							<StyledTableRow
-								key={index}
-								onClick={() =>
-									(window.location.href = `/game/${encodeURIComponent(row.id)}/${encodeURIComponent(row.title)}`)
-								}
-							>
-								{/* Map through each key in columnWidths and create a cell for it */}
+							<StyledTableRow key={index}>
 								{Object.keys(columnWidths).map((key) => (
-									// The cell in the table body. It shows the value of the current column for this row.
 									<StyledTableCell key={key} style={{ color: 'white' }}>
-										{row[key]}
+										{/* Jeśli kolumna zawiera ID lub tytuł, przekieruj do odpowiedniej ścieżki */}
+										{key === 'id' || key === 'title' ? (
+											<Link to={`/game/${encodeURIComponent(row.id)}/${encodeURIComponent(row.title)}`}>
+												{row[key]}
+											</Link>
+										) : (
+											// W przeciwnym razie wyświetl normalnie
+											row[key]
+										)}
 									</StyledTableCell>
 								))}
 							</StyledTableRow>
